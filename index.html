@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iPhone 17</title>
+    
+    <!-- Подключаем Tailwind CSS для стилей -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Подключаем шрифт Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Подключаем иконки Google Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: #ffffff; /* Основной цвет текста - белый */
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #6e48aa, #a54f9f, #d75b92);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Контейнер для видеофона */
+        #background-video {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1;
+            object-fit: cover; /* Гарантирует, что видео покроет весь экран без искажений */
+        }
+
+        /* Анимация для смены изображения */
+        #modal-image {
+            transition: opacity 0.3s ease-in-out;
+        }
+
+
+        /* Адаптивность для мобильных устройств */
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding-top: 0;
+                text-align: center;
+            }
+            .text-info, .buy-box-wrapper {
+                position: static;
+                transform: none;
+                width: 100%;
+                margin-top: 2rem;
+            }
+             .text-info {
+                order: 1;
+            }
+            .buy-box-wrapper {
+                order: 2;
+            }
+            .text-info h1 {
+                font-size: 4rem;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-black">
+    
+    <!-- Видеофон -->
+    <video id="background-video" autoplay loop muted playsinline poster="https://placehold.co/1920x1080/000000/000000.png">
+        <source src="https://files.catbox.moe/d98sv3.mp4" type="video/mp4">
+        Ваш браузер не поддерживает тег video.
+    </video>
+
+    <!-- Новая навигационная панель -->
+    <nav class="bg-black/80 backdrop-blur-sm fixed top-0 left-0 right-0 z-50 h-11">
+        <div class="max-w-screen-lg mx-auto flex items-center justify-between h-full px-4">
+            <!-- Ссылки для десктопа -->
+            <div class="hidden md:flex items-center justify-center space-x-6 text-xs text-gray-300 w-full">
+                <a href="#" class="hover:text-white">
+                    <img src='https://i.postimg.cc/KjhmBzCW/Apple-logo-grey-svg.png' alt='Apple Logo' class="h-4 opacity-80 hover:opacity-100 transition-opacity"/>
+                </a>
+                <a href="#" class="hover:text-white">Store</a>
+                <a href="#" class="hover:text-white">Mac</a>
+                <a href="#" class="hover:text-white">iPad</a>
+                <a href="#" class="hover:text-white">iPhone</a>
+                <a href="#" class="hover:text-white">Watch</a>
+                <a href="#" class="hover:text-white">Vision</a>
+                <a href="#" class="hover:text-white">AirPods</a>
+                <a href="#" class="hover:text-white">TV & Home</a>
+                <a href="#" class="hover:text-white">Entertainment</a>
+                <a href="#" class="hover:text-white">Accessories</a>
+                <a href="#" class="hover:text-white">Support</a>
+                <a href="#" class="hover:text-white">
+                    <span class="material-icons-outlined" style="font-size: 16px;">search</span>
+                </a>
+                <a href="#" class="hover:text-white">
+                    <span class="material-icons-outlined" style="font-size: 16px;">shopping_bag</span>
+                </a>
+            </div>
+
+            <!-- Иконки для мобильной версии -->
+            <div class="md:hidden flex items-center justify-between w-full">
+                <a href="#" class="text-gray-300 hover:text-white">
+                    <img src='https://i.postimg.cc/KjhmBzCW/Apple-logo-grey-svg.png' alt='Apple Logo' class="h-4 opacity-80 hover:opacity-100 transition-opacity"/>
+                </a>
+                 <div class="flex items-center space-x-4">
+                    <a href="#" class="text-gray-300 hover:text-white">
+                        <span class="material-icons-outlined" style="font-size: 20px;">search</span>
+                    </a>
+                    <a href="#" class="text-gray-300 hover:text-white">
+                        <span class="material-icons-outlined" style="font-size: 20px;">shopping_bag</span>
+                    </a>
+                    <button class="text-gray-300 hover:text-white">
+                        <span class="material-icons-outlined" style="font-size: 24px;">menu</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Верхний баннер -->
+    <header class="text-center py-3 bg-black/20 text-white/80 text-xs mt-11">
+        This is a new promotional campaign from Apple where you can get a new iPhone.
+    </header>
+
+    <!-- Основной контейнер -->
+    <main class="relative min-h-[90vh] w-full flex items-center justify-center p-8 main-content">
+        
+        <!-- Кнопка паузы -->
+        <div class="absolute top-8 right-8 w-8 h-8 bg-black/20 rounded-full flex items-center justify-center cursor-pointer">
+            <span class="material-icons-outlined text-white/80" style="font-size: 18px;">pause</span>
+        </div>
+
+        <!-- Левый блок с текстом -->
+        <div class="absolute bottom-24 left-16 text-info">
+            <h2 class="text-xl font-bold">iPhone 17 Pro</h2>
+            <h1 class="gradient-text text-7xl font-black tracking-tighter -mt-2">
+                Apple promotions
+            </h1>
+        </div>
+        
+        <!-- Правый блок покупки -->
+        <div class="absolute bottom-24 right-16 buy-box-wrapper">
+             <div class="bg-black/30 backdrop-blur-sm rounded-xl p-4 flex items-center justify-center">
+                <a href="#" id="get-button" class="bg-blue-600 text-white font-semibold text-lg px-10 py-4 rounded-full hover:bg-blue-700 transition-colors">Get</a>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Модальное окно ВЫБОРА -->
+    <div id="modal-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+        <div class="bg-white text-black rounded-lg w-full max-w-5xl h-[80vh] flex flex-col p-6 relative">
+            <button id="close-button" class="absolute top-4 right-4 text-gray-500 hover:text-black">&times;</button>
+            
+            <div class="flex-shrink-0">
+                <h2 class="text-2xl font-bold">iPhone 17 Pro</h2>
+                <div class="border-t my-4"></div>
+                <div class="flex space-x-4 text-sm">
+                    <div class="flex items-center space-x-2">
+                        <span class="material-icons-outlined text-gray-700">local_shipping</span>
+                        <span>Fast shipping</span>
+                    </div>
+                     <div class="flex items-center space-x-2">
+                        <span class="material-icons-outlined text-gray-700">store</span>
+                        <span>Pick up from Store</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex-grow flex mt-6 items-start overflow-hidden">
+                <!-- Левая часть: Изображение -->
+                <div class="w-1/2 h-full flex items-center justify-center">
+                    <img id="modal-image" src="https://i.postimg.cc/v87vnKnR/17-pro-silver-removebg-preview.png" alt="iPhone 17 Silver" class="max-h-full w-full object-contain">
+                </div>
+
+                <!-- Правая часть: Опции -->
+                <div class="w-1/2 h-full flex flex-col pl-8 pr-4">
+                    <div class="flex-grow overflow-y-auto">
+                        <h3 class="font-bold text-lg">Finish. <span class="text-gray-500">Pick your favorite.</span></h3>
+                        
+                        <div class="mt-4">
+                            <p class="font-semibold">Color - <span id="color-name" class="text-gray-600">Silver</span></p>
+                            <div id="color-options" class="flex space-x-2 mt-2">
+                                <button data-color-name="Silver" data-image-src="https://i.postimg.cc/v87vnKnR/17-pro-silver-removebg-preview.png" class="w-8 h-8 rounded-full bg-gray-200 ring-2 ring-blue-500 ring-offset-2"></button>
+                                <button data-color-name="Cosmic Orange" data-image-src="https://i.postimg.cc/wT77zygf/17-pro-cosmic-4-removebg-preview.png" class="w-8 h-8 rounded-full bg-orange-400"></button>
+                                <button data-color-name="Deep Blue" data-image-src="https://i.postimg.cc/gJ7bH0Qm/17-pro-deep-blue-4-removebg-preview.png" class="w-8 h-8 rounded-full bg-blue-900"></button>
+                            </div>
+                        </div>
+
+                        <div class="mt-8">
+                            <h3 class="font-bold text-lg">Storage. <span class="text-gray-500">How much space do you need?</span></h3>
+                            <div id="storage-options" class="space-y-3 mt-4">
+                                <div class="border rounded-lg p-4 flex justify-between items-center cursor-pointer">
+                                    <div><p class="font-bold">256GB¹</p></div>
+                                </div>
+                                <div class="border rounded-lg p-4 flex justify-between items-center ring-2 ring-blue-500 cursor-pointer">
+                                    <div><p class="font-bold">512GB¹</p></div>
+                                </div>
+                                <div class="border rounded-lg p-4 flex justify-between items-center cursor-pointer">
+                                    <div><p class="font-bold">1TB¹</p></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Блок с итоговой информацией -->
+                    <div class="flex-shrink-0 mt-8 border-t pt-6">
+                        <h4 id="summary-title" class="font-bold text-xl mb-4">iPhone 17 Pro 512GB Silver</h4>
+                        <div class="space-y-4 text-sm">
+                            <div class="flex items-start space-x-3">
+                                <span class="material-icons-outlined text-gray-700">local_shipping</span>
+                                <div>
+                                    <p class="font-semibold">Ships:</p>
+                                    <p class="text-gray-600">Free Shipping</p>
+                                    <a href="#" class="text-blue-600 hover:underline">Get delivery dates</a>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <span class="material-icons-outlined text-gray-700">store</span>
+                                <div>
+                                    <p class="font-semibold">Pickup:</p>
+                                    <a href="#" class="text-blue-600 hover:underline">Check availability</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-6">
+                            <button id="add-to-bag-button" class="w-full bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition-colors">
+                                Add to Bag
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно КОШИКА -->
+    <div id="bag-modal-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+        <div class="bg-white text-black rounded-lg w-full max-w-4xl max-h-[90vh] flex flex-col p-8 relative">
+            <button id="close-bag-button" class="absolute top-4 right-4 text-gray-500 hover:text-black">&times;</button>
+            <h2 class="text-3xl font-bold mb-6">Your Bag</h2>
+
+            <div class="flex-grow overflow-y-auto">
+                <div class="border-t border-b py-6">
+                    <div class="flex items-start space-x-6">
+                        <img id="bag-item-image" src="" alt="Selected iPhone" class="w-24 h-auto object-contain">
+                        <div class="flex-grow">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 id="bag-item-title" class="font-bold text-lg"></h3>
+                                    <p class="text-sm text-gray-600 mt-1">Carrier: AT&T</p>
+                                    <a href="#" class="text-sm text-blue-600 hover:underline">Show carrier plan details and charges</a>
+                                </div>
+                                <div class="text-right">
+                                    <a href="#" class="text-sm text-blue-600 hover:underline">Remove</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Новая форма вместо итогов -->
+                <div class="py-6">
+                    <h3 class="font-bold text-lg mb-4">Shipping Information</h3>
+                    <form class="space-y-4">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700">Full Name</label>
+                            <input type="text" name="name" id="name" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="John Doe">
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="md:col-span-2">
+                                <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
+                                <input type="text" name="address" id="address" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="123 Apple St">
+                            </div>
+                            <div>
+                                <label for="zip" class="block text-sm font-medium text-gray-700">Zip Code</label>
+                                <input type="text" name="zip" id="zip" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="90210">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="flex-shrink-0 pt-6 border-t">
+                 <button id="confirm-button" class="w-full bg-black text-white font-semibold py-3 rounded-lg hover:bg-gray-800 transition-colors">
+                    Confirm
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно ПОДТВЕРЖДЕНИЯ -->
+    <div id="confirmation-modal-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+        <div class="bg-white text-black rounded-lg w-full max-w-md flex flex-col p-8 relative text-center">
+            <button id="close-confirmation-button" class="absolute top-4 right-4 text-gray-500 hover:text-black">&times;</button>
+            <img src='https://i.postimg.cc/KjhmBzCW/Apple-logo-grey-svg.png' alt='Apple Logo' class="h-8 mx-auto mb-4"/>
+            <h2 class="text-3xl font-bold mb-4">Your order complete!</h2>
+            <div class="border-t my-4"></div>
+            <div class="flex justify-center space-x-8 text-sm text-gray-700">
+                <div class="flex items-center space-x-2">
+                    <span class="material-icons-outlined">local_shipping</span>
+                    <span>Ships in 1–7 day.</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <span class="material-icons-outlined">store</span>
+                    <span>Pick up at an Apple Store near you.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // --- ОБЩИЕ ЭЛЕМЕНТЫ ---
+        const modalOverlay = document.getElementById('modal-overlay');
+        const bagModalOverlay = document.getElementById('bag-modal-overlay');
+        const confirmationModalOverlay = document.getElementById('confirmation-modal-overlay');
+
+        // --- Логика для модального окна ВЫБОРА ---
+        const getButton = document.getElementById('get-button');
+        const closeButton = document.getElementById('close-button');
+        const addToBagButton = document.getElementById('add-to-bag-button');
+        const summaryTitleEl = document.getElementById('summary-title');
+        const colorNameEl = document.getElementById('color-name');
+        const storageOptions = document.getElementById('storage-options');
+        const colorOptions = document.getElementById('color-options');
+        const colorButtons = colorOptions.querySelectorAll('button');
+        const modalImage = document.getElementById('modal-image');
+        const storageDivs = storageOptions.querySelectorAll('div.border');
+        
+        function updateSummary() {
+            const selectedColor = colorNameEl.textContent;
+            const selectedStorageDiv = storageOptions.querySelector('div.ring-2');
+            const selectedStorage = selectedStorageDiv ? selectedStorageDiv.querySelector('p').textContent.replace('¹', '') : '512GB';
+            summaryTitleEl.textContent = `iPhone 17 Pro ${selectedStorage} ${selectedColor}`;
+        }
+
+        getButton.addEventListener('click', (event) => {
+            event.preventDefault(); 
+            modalOverlay.classList.remove('hidden');
+            updateSummary();
+        });
+
+        closeButton.addEventListener('click', () => {
+            modalOverlay.classList.add('hidden');
+        });
+
+        modalOverlay.addEventListener('click', (event) => {
+            if (event.target === modalOverlay) {
+                modalOverlay.classList.add('hidden');
+            }
+        });
+
+        colorButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                if (colorNameEl.textContent === button.dataset.colorName) return;
+                colorButtons.forEach(btn => btn.classList.remove('ring-2', 'ring-blue-500', 'ring-offset-2'));
+                button.classList.add('ring-2', 'ring-blue-500', 'ring-offset-2');
+                colorNameEl.textContent = button.dataset.colorName;
+                modalImage.style.opacity = 0;
+                setTimeout(() => {
+                    modalImage.src = button.dataset.imageSrc;
+                    modalImage.alt = `iPhone 17 ${button.dataset.colorName}`;
+                    modalImage.style.opacity = 1;
+                }, 300);
+                updateSummary();
+            });
+        });
+
+        storageDivs.forEach(div => {
+            div.addEventListener('click', () => {
+                storageDivs.forEach(d => d.classList.remove('ring-2', 'ring-blue-500'));
+                div.classList.add('ring-2', 'ring-blue-500');
+                updateSummary();
+            });
+        });
+
+        // --- Логика для модального окна КОШИКА ---
+        const closeBagButton = document.getElementById('close-bag-button');
+        const bagItemImage = document.getElementById('bag-item-image');
+        const bagItemTitle = document.getElementById('bag-item-title');
+
+        addToBagButton.addEventListener('click', () => {
+            // Переносим данные
+            bagItemImage.src = modalImage.src;
+            bagItemTitle.textContent = summaryTitleEl.textContent;
+
+            // Переключаем окна
+            modalOverlay.classList.add('hidden');
+            bagModalOverlay.classList.remove('hidden');
+        });
+
+        closeBagButton.addEventListener('click', () => {
+            bagModalOverlay.classList.add('hidden');
+        });
+        
+        bagModalOverlay.addEventListener('click', (event) => {
+            if (event.target === bagModalOverlay) {
+                bagModalOverlay.classList.add('hidden');
+            }
+        });
+
+        // --- Логика для модального окна ПОДТВЕРЖДЕНИЯ ---
+        const confirmButton = document.getElementById('confirm-button');
+        const closeConfirmationButton = document.getElementById('close-confirmation-button');
+
+        confirmButton.addEventListener('click', () => {
+            bagModalOverlay.classList.add('hidden');
+            confirmationModalOverlay.classList.remove('hidden');
+        });
+
+        closeConfirmationButton.addEventListener('click', () => {
+            confirmationModalOverlay.classList.add('hidden');
+        });
+
+        confirmationModalOverlay.addEventListener('click', (event) => {
+            if (event.target === confirmationModalOverlay) {
+                confirmationModalOverlay.classList.add('hidden');
+            }
+        });
+
+    </script>
+</body>
+</html>
+
